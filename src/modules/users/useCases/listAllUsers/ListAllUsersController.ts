@@ -3,11 +3,15 @@ import { Request, Response } from "express";
 import { ListAllUsersUseCase } from "./ListAllUsersUseCase";
 
 class ListAllUsersController {
-  constructor(private listAllUsersUseCase: ListAllUsersUseCase) {}
+    constructor(private listAllUsersUseCase: ListAllUsersUseCase) {}
 
-  handle(request: Request, response: Response): Response {
-    // Complete aqui
-  }
+    handle(req: Request, res: Response): Response {
+        const { user_id } = req.headers;
+
+        const users = this.listAllUsersUseCase.execute({ user_id });
+
+        return res.json(users);
+    }
 }
 
 export { ListAllUsersController };
